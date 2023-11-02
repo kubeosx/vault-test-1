@@ -19,7 +19,7 @@ spec:
         vault.hashicorp.com/agent-inject: 'true'
         vault.hashicorp.com/role: 'vault-test-1'
         vault.hashicorp.com/agent-inject-secret-config.txt: 'kubeos/dev/vault-test-1'
-        vault.hashicorp.com/log-level: DEBUG
+        vault.hashicorp.com/log-level: Debug
     spec:
       serviceAccountName: vault-test-1
       automountServiceAccountToken: true

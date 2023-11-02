@@ -1,10 +1,18 @@
 {
-  "x-generator": "NSwag v13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v10.0.0.0))",
-  "openapi": "3.0.0",
+  "openapi": "3.0.1",
   "info": {
-    "title": "Open CUE Service",
-    "description": "HTTP REST API service for Open CUE CLI",
-    "version": "1.1.0"
+    "title": "Test.Vault API",
+    "description": "An ASP.NET Core Web API: Test.Vault",
+    "termsOfService": "https://github.com/kubeosx/vault-test-1",
+    "contact": {
+      "name": "Contact Info",
+      "url": "https://github.com/kubeosx/vault-test-1"
+    },
+    "license": {
+      "name": "License",
+      "url": "https://github.com/kubeosx/vault-test-1"
+    },
+    "version": "v1"
   },
   "paths": {
     "/WeatherForecast": {
@@ -12,12 +20,28 @@
         "tags": [
           "WeatherForecast"
         ],
-        "operationId": "WeatherForecast_Get",
+        "operationId": "GetWeatherForecast",
         "responses": {
           "200": {
-            "description": "",
+            "description": "Success",
             "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
               "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "text/json": {
                 "schema": {
                   "type": "array",
                   "items": {
@@ -35,20 +59,31 @@
         "tags": [
           "WeatherForecast"
         ],
-        "operationId": "WeatherForecast_OutgoingHttp",
         "parameters": [
           {
             "name": "url",
             "in": "query",
+            "style": "form",
             "schema": {
               "type": "string"
-            },
-            "x-position": 1
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/WeatherForecast/Metrictest": {
+      "get": {
+        "tags": [
+          "WeatherForecast"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
           }
         }
       }
@@ -58,7 +93,6 @@
     "schemas": {
       "WeatherForecast": {
         "type": "object",
-        "additionalProperties": false,
         "properties": {
           "date": {
             "type": "string",
@@ -70,13 +104,15 @@
           },
           "temperatureF": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "readOnly": true
           },
           "summary": {
             "type": "string",
             "nullable": true
           }
-        }
+        },
+        "additionalProperties": false
       }
     }
   }

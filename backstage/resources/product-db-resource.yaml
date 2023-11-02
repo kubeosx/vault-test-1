@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: product-db
+  description: Stores product details
+spec:
+  type: database
+  owner: product-team
+  system: product-site

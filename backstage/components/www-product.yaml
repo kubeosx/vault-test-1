@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: www-product
+  description: Artist main website
+  annotations:
+    backstage.io/techdocs-ref: dir:../docs/www-product
+spec:
+  type: website
+  lifecycle: production
+  owner: product-team
+  system: product-site
+  consumesApis: ['component:product-lookup']

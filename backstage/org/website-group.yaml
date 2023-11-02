@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: website-group
+  description: The infra department
+spec:
+  type: department
+  # Intentional no profile for testing
+  parent: acme-corp
+  children: [product-team]

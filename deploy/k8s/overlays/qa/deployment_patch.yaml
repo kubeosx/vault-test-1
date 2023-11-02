@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: Test.Vault
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  replicas: 1
+  selector:
+    matchLabels:
+      app: Test.Vault
+  template:
+    metadata:
+      annotations:
+        backstage.io/kubernetes-id: "Test.Vault"
+    spec:
+      containers:
+        - name: my-Test.Vault
+          image: rohitrustagi007/Test.Vault:1
+          env: 
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "QA"  
+          ports:
+            - containerPort: 8080
+          startupProbe:
+            httpGet:
+              path: /
+              port: 8080
+            failureThreshold: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 10
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 200m
+              memory: 500Mi
+          securityContext:
+            runAsUser: 1000 # Replace with your desired user ID
+            runAsGroup: 1000 # Replace with your desired group ID
+            capabilities:
+              drop:
+                - all
+            readOnlyRootFilesystem: true

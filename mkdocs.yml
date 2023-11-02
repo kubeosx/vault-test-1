@@ -1,0 +1,8 @@
+site_name: "Test.Vault"
+site_description: "test-vault"
+
+nav:
+  - Introduction: index.md
+
+plugins:
+  - techdocs-core

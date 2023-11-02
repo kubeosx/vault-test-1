@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vault-test-1
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vault-test-1
+  template:
+    metadata:
+      annotations:
+        backstage.io/kubernetes-id: vault-test-1
+    spec:
+      containers:
+        - name: my-vault-test-1
+          image: rohitrustagi007/vault-test-1:1
+          env: 
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Development"  
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 200m
+              memory: 500Mi
+          securityContext:
+            runAsUser: 1000 # Replace with your desired user ID
+            runAsGroup: 1000 # Replace with your desired group ID
+            capabilities:
+              drop:
+                - all
+            readOnlyRootFilesystem: true

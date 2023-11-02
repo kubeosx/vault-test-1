@@ -1,0 +1,16 @@
+name: .NET > Build > Test > OpenApi > Docker
+
+on:
+  push:
+    branches: [main] #dev, staging,
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-test-openapi:
+    uses: kubeosx/kubeos-github-workflows/.github/workflows/dotnet-build-test.yaml@main
+    with:
+      # need to specify working-directory as that's where the source code lives
+      working-directory: ./src
+    secrets: inherit

@@ -1,0 +1,24 @@
+# apiVersion: backstage.io/v1alpha1
+# kind: API
+# metadata:
+#   name: dotapi
+#   description: The dotapi API
+#   tags:
+#     - store
+#     - rest
+#   links:
+#     - url: https://github.com/kubeosx/dotday
+#       icon: web
+#       title: Github
+#     - url: https://github.com/kubeosx/dotday/issues
+#       icon: web
+#       title: Github Issues
+#     - url: https://github.com/kubeosx/dotday/blob/main/src/openapi.json
+#       title: API Spec
+#       icon: code
+# spec:
+#   type: openapi
+#   lifecycle: experimental
+#   owner: product-team
+#   definition:
+#     $json: ./openapi.json

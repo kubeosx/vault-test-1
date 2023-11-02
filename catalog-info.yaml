@@ -1,0 +1,63 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "Test.Vault"
+  description: "test-vault"
+  annotations:
+    github.com/project-slug: kubeosx/vault-test-1
+    backstage.io/techdocs-ref: dir:.
+    backstage.io/kubernetes-id: "Test.Vault"
+    backstage.io/kubernetes-namespace: "dev"
+    prometheus.io/alert: all
+  tags:
+    - dotnet
+    - webapi
+  links:
+    - url: https://github.com/kubeosx/vault-test-1
+      icon: web
+      title: Github
+    - url: https://github.com/kubeosx/vault-test-1/issues
+      icon: web
+      title: Github Issues
+spec:
+  type: service
+  lifecycle: experimental
+  owner: "group:default/backend-team"
+  system:  "system:default/shopping-app"
+  providesApis:
+    - "Test.Vault-api"
+  dependsOn:
+    - component:default/kubeos-github-workflows
+  
+    - component:default/shopcart.api
+  
+  consumesApis:
+  
+    - api:default/auth-api
+  
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: Test.Vault-api
+  description: The Test.Vault API
+  tags:
+    - api
+    - rest
+  links:
+    - url: https://github.com/kubeosx/vault-test-1
+      icon: web
+      title: Github
+    - url: https://github.com/kubeosx/vault-test-1/issues
+      icon: web
+      title: Github Issues
+    - url: https://github.com/kubeosx/vault-test-1/blob/main/src/openapi.json
+      title: API Spec
+      icon: code
+spec:
+  type: openapi
+  lifecycle: experimental
+  owner: "group:default/backend-team"
+  system:  "system:default/shopping-app"
+  definition:
+    $text: ./openapi.json

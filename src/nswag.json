@@ -1,0 +1,13 @@
+{
+  "runtime": "Net70",
+  "defaultVariables": "configuration=Debug",
+  "documentGenerator": {
+    "aspNetCoreToOpenApi": {
+      "project": "Test.Vault/Test.Vault.csproj",
+      "configuration": "$(configuration)",
+      "useDocumentProvider": true,
+      "documentName": "openapi",
+      "output": "openapi.json"
+    }
+  }
+}

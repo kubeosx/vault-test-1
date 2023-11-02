@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vault-test-1
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vault-test-1
+  template:
+    metadata:
+      annotations:
+        backstage.io/kubernetes-id: vault-test-1
+        vault.hashicorp.com/agent-inject: 'true'
+        vault.hashicorp.com/role: 'vault-test-1'
+        vault.hashicorp.com/agent-inject-secret-config.txt: 'kubeos/dev/vault-test-1'
+    spec:
+      serviceAccountName: vault-test-1
+      automountServiceAccountToken: true
+      volumes:
+        # - name: rw-tmp-volume
+        #   persistentVolumeClaim:
+        #     claimName: imagestoreclaim
+        - name: tmp-rw-volume
+          emptyDir: {}
+        - name: appsettings-volume
+          configMap:
+            name: appsettings
+      containers:
+        - name: my-vault-test-1
+          image: rohitrustagi007/vault-test-1:1
+          env: 
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Development"
+          volumeMounts:
+            - mountPath: "/tmp"
+              name: tmp-rw-volume
+            - name: appsettings-volume
+              mountPath: /app/Settings    
+          ports:
+            - containerPort: 8080
+          startupProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            failureThreshold: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 10
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 200m
+              memory: 500Mi
+          securityContext:
+            runAsUser: 1000 # Replace with your desired user ID
+            runAsGroup: 1000 # Replace with your desired group ID
+            capabilities:
+              drop:
+                - all
+            readOnlyRootFilesystem: true

@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: product-site
+  description: Everything related to cloudnxt-backstage
+  tags:
+    - portal
+spec:
+  owner: product-team
+  domain: product

@@ -1,0 +1,45 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: product-lookup
+  description: Product Lookup
+  tags:
+    - dotnet
+    - postgres
+    - kubernetes
+    - docker
+  links:
+    - url: https://example.com/user
+      title: Examples Users
+      icon: user
+    - url: https://example.com/group
+      title: Example Group
+      icon: group
+    - url: https://example.com/cloud
+      title: Link with Cloud Icon
+      icon: cloud
+    - url: https://example.com/dashboard
+      title: Dashboard
+      icon: dashboard
+    - url: https://example.com/help
+      title: Support
+      icon: help
+    - url: https://example.com/web
+      title: Website
+      icon: web
+    - url: https://example.com/alert
+      title: Alerts
+      icon: alert
+  annotations:
+    backstage.io/linguist: 'https://github.com/backstage/backstage/tree/master/plugins/playlist'
+    backstage.io/kubernetes-id: product-lookup
+    backstage.io/kubernetes-namespace: dev
+spec:
+  type: service
+  lifecycle: experimental
+  owner: product-team
+  system: product-site
+  dependsOn: ['resource:product-db','resource:product-bucket']
+  apiConsumedBy: ['component:www-product']
+  providesApis: 
+    - product-api

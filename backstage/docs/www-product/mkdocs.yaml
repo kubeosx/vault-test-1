@@ -1,0 +1,8 @@
+site_name: "product website"
+site_description: "product website"
+
+nav:
+  - Introduction: index.md
+
+plugins:
+  - techdocs-core
